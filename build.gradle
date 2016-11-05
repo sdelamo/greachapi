@@ -1,0 +1,9 @@
+ext {
+    seleniumVersion = '2.53.1'
+    groovyVersion = '2.4.7'
+    gebVersion = '1.0'
+    htmlUnitDriverVersion = '2.47.1'
+    htmlUnitVersion = '2.18'
+    spockVersion = '1.0-groovy-2.4'
+}
+
