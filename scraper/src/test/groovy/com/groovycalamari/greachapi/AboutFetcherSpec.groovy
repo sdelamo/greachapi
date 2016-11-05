@@ -26,6 +26,15 @@ class AboutFetcherSpec extends Specification {
 
         then:
         youtube == 'http://www.youtube.com/user/TheGreachChannel'
+
+        when:
+        def about = page as About
+
+        then:
+        about.email == 'crew@greachconf.com'
+        about.youtube == 'http://www.youtube.com/user/TheGreachChannel'
+        about.address == 'The Greach Network SL, 2011-2017 - CIF B86412491 - C/Valtravieso, 28023 Madrid (Spain)'
+        !about.crew.isEmpty()
     }
 
 }

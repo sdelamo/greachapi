@@ -1,5 +1,6 @@
 package com.groovycalamari.greachapi.geb
 
+import com.groovycalamari.greachapi.About
 import com.groovycalamari.greachapi.CrewMember
 import geb.Page
 
@@ -9,6 +10,15 @@ class HomePage extends Page {
     static content = {
         footerLinks(required: false) { $('footer a') }
         addressDiv(required: false) { $('div.credits', 0) }
+    }
+
+    Object asType(Class clazz) {
+        if (clazz == About) {
+            return new About(address: address(), youtube: youtube(), email: email(), crew: crewMembers())
+        }
+        else {
+            super.asType(clazz)
+        }
     }
 
     Set<CrewMember> crewMembers() {
