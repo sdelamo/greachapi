@@ -10,7 +10,6 @@ class FetchCrewSpec extends Specification {
 
         when:
         def browser = new Browser()
-        browser.baseUrl = 'http://2017.greachconf.com'
         HomePage page = browser.to HomePage
         def crew = page.crewMembers()
 
