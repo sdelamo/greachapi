@@ -2,6 +2,7 @@ package com.groovycalamari.greachapi.geb
 
 import com.groovycalamari.greachapi.About
 import com.groovycalamari.greachapi.CrewMember
+import com.groovycalamari.greachapi.Ticket
 import geb.Page
 
 class HomePage extends Page {
@@ -10,6 +11,9 @@ class HomePage extends Page {
     static content = {
         footerLinks(required: false) { $('footer a') }
         addressDiv(required: false) { $('div.credits', 0) }
+        ticketsDivs { $('.ptp-pricing-table .ptp-item-container') }
+        ticketDiv { i -> $('.ptp-pricing-table .ptp-item-container', i).module(TicketModule) }
+
     }
 
     Object asType(Class clazz) {
@@ -62,5 +66,22 @@ class HomePage extends Page {
             text = text.substring(0, text.indexOf(advertisingCopy))
         }
         text?.trim()
+    }
+
+    Set<Ticket> tickets() {
+        def result = [] as Set<Ticket>
+        if ( ticketsDivs.empty ) {
+            return result
+        }
+
+        for ( int i = 0; i < ticketsDivs.size();  i++) {
+            def mod = ticketDiv(i)
+            result << new Ticket(name: mod.name(),
+                    price: mod.price(),
+                    info: mod.info(),
+                    callToActionUrl: mod.callToActionUrl(),
+                    available: mod.available())
+        }
+        result
     }
 }
