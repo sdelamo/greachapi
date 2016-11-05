@@ -1,3 +1,4 @@
 /.gradle
 /.idea
 /scraper/build
+/phantomjsdriver.log
