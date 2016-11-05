@@ -1,5 +1,6 @@
 package com.groovycalamari.greachapi
 
+import com.groovycalamari.greachapi.geb.AboutFetcher
 import com.groovycalamari.greachapi.geb.HomePage
 import geb.Browser
 import spock.lang.Specification
@@ -28,7 +29,7 @@ class AboutFetcherSpec extends Specification {
         youtube == 'http://www.youtube.com/user/TheGreachChannel'
 
         when:
-        def about = page as About
+        def about = AboutFetcher.fetchAbout()
 
         then:
         about.email == 'crew@greachconf.com'
