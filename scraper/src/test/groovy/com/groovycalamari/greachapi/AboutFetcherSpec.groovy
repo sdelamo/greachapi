@@ -9,7 +9,7 @@ class AboutFetcherSpec extends Specification {
 
     def "test address is fetched correctly"() {
         when:
-        def browser = new Browser()
+        def browser = new Browser(baseUrl: GreachWebsite.BASEURL)
         HomePage page = browser.to HomePage
         String address = page.address()
 

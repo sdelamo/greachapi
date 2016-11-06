@@ -9,7 +9,7 @@ class FetchCrewSpec extends Specification {
     def "I should be able to fetch Ivan Lopez and Alberto Vilches as Greach Organizers"() {
 
         when:
-        def browser = new Browser()
+        def browser = new Browser(baseUrl: GreachWebsite.BASEURL)
         HomePage page = browser.to HomePage
         def crew = page.crewMembers()
 
