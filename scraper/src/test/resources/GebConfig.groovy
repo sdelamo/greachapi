@@ -3,8 +3,6 @@ import org.openqa.selenium.firefox.FirefoxDriver
 import org.openqa.selenium.htmlunit.HtmlUnitDriver
 import org.openqa.selenium.phantomjs.PhantomJSDriver
 
-baseUrl = 'http://2017.greachconf.com'
-
 environments {
 
     chrome {
@@ -24,3 +22,4 @@ environments {
     }
 }
 
+baseUrl = 'http://2017.greachconf.com'
