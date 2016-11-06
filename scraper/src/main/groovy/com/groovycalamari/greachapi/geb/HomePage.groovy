@@ -13,21 +13,20 @@ class HomePage extends Page {
         addressDiv(required: false) { $('div.credits', 0) }
         ticketsDivs { $('.ptp-pricing-table .ptp-item-container') }
         ticketDiv { i -> $('.ptp-pricing-table .ptp-item-container', i).module(TicketModule) }
-
     }
+    public static final String MAILTO_PREFFIX = 'mailto:'
 
     Object asType(Class clazz) {
         if (clazz == About) {
             return new About(address: address(), youtube: youtube(), email: email(), crew: crewMembers())
         }
-        else {
-            super.asType(clazz)
-        }
+
+        super.asType(clazz)
     }
 
     Set<CrewMember> crewMembers() {
         if ( footerLinks.empty ) {
-            return new HashSet<CrewMember>()
+            return [] as Set<CrewMember>
         }
         def twitterLinks = footerLinks.findAll { it.getAttribute('href').contains('twitter.com') }
         twitterLinks.collect { new CrewMember(name: it.text(), twitter: it.getAttribute('href')) } as Set<CrewMember>
@@ -53,17 +52,19 @@ class HomePage extends Page {
         if ( footerLinks.empty ) {
             return ''
         }
-        String href = footerLinks.find { it.getAttribute('href').contains('mailto:') }?.getAttribute('href')
+        String href = footerLinks.find { it.getAttribute('href').contains(MAILTO_PREFFIX) }?.getAttribute('href')
         if ( href ) {
-            return href.substring('mailto:'.length(), href.length())
+            return href[MAILTO_PREFFIX.length()..-1]
         }
         href
     }
 
-    static String removeAdvertisingCopy(String text) {
-        final String advertisingCopy = 'Powered by'
-        if ( text && text.indexOf(advertisingCopy) != -1 ) {
-            text = text.substring(0, text.indexOf(advertisingCopy))
+    static String removeAdvertisingCopy(String str) {
+        final String advertisingCopy = ' Powered by'
+        def index = str.indexOf(advertisingCopy)
+        def text = str
+        if ( str &&  index != -1 ) {
+            text = str[0..index]
         }
         text?.trim()
     }

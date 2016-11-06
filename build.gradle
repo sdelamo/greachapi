@@ -7,3 +7,24 @@ ext {
     spockVersion = '1.0-groovy-2.4'
 }
 
+repositories {
+    jcenter()
+}
+
+subprojects { project ->
+    apply plugin: 'groovy'
+    apply plugin: 'codenarc'
+    codenarc {
+        toolVersion = '0.25.2'
+    }
+
+    codenarcMain {
+        ignoreFailures false
+        configFile file("${rootProject.projectDir}/config/codenarc/codenarc.groovy")
+    }
+
+    codenarcTest {
+        ignoreFailures false
+        configFile file("${rootProject.projectDir}/config/codenarc/codenarcTest.groovy")
+    }
+}

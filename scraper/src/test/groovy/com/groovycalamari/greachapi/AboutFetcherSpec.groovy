@@ -11,12 +11,6 @@ class AboutFetcherSpec extends Specification {
         when:
         def browser = new Browser(baseUrl: GreachWebsite.BASEURL)
         HomePage page = browser.to HomePage
-        String address = page.address()
-
-        then:
-        address == 'The Greach Network SL, 2011-2017 - CIF B86412491 - C/Valtravieso, 28023 Madrid (Spain)'
-
-        when:
         def email = page.email()
 
         then:
@@ -27,6 +21,12 @@ class AboutFetcherSpec extends Specification {
 
         then:
         youtube == 'http://www.youtube.com/user/TheGreachChannel'
+
+        when:
+        String address = page.address()
+
+        then:
+        address == 'The Greach Network SL, 2011-2017 - CIF B86412491 - C/Valtravieso, 28023 Madrid (Spain)'
 
         when:
         def about = AboutFetcher.fetchAbout()

@@ -11,7 +11,7 @@ class Main {
     final static String FORMAT_CSV = 'csv'
     final static String FORMAT_PLIST = 'plist'
     final static String FORMAT_SQLITE = 'sqlite'
-    public static final String CSV_DELIMITER = ';'
+    final static String CSV_DELIMITER = ';'
 
     @CompileStatic(TypeCheckingMode.SKIP)
     static void main(String[] args) {
@@ -23,15 +23,16 @@ class Main {
 
         def tickets = TicketsFetcher.fetchTickets()
 
-        if ( format == FORMAT_CSV ) {
-            Ticket.saveCollectionAsCsv(filename, outputpath, tickets, CSV_DELIMITER)
-
-        } else if ( format == FORMAT_PLIST ) {
-            Ticket.saveCollectionAsPlist(filename, outputpath, tickets)
-
-        } else if ( format == FORMAT_SQLITE ) {
-            Ticket.saveCollectionAsSQLite(filename, outputpath, tickets)
-
+        switch (format) {
+            case FORMAT_CSV:
+                Ticket.saveCollectionAsCsv(filename, outputpath, tickets, CSV_DELIMITER)
+                break
+            case FORMAT_PLIST:
+                Ticket.saveCollectionAsPlist(filename, outputpath, tickets)
+                break
+            case FORMAT_SQLITE:
+                Ticket.saveCollectionAsSQLite(filename, outputpath, tickets)
+                break
         }
     }
 
@@ -43,7 +44,7 @@ class Main {
         String filename = args[0]
         String outputpath = args[1]
 
-        String format = 'csv'
+        String format = FORMAT_CSV
         if ( args.length >= 3 ) {
             if ( !(args[2] in validFormats()) ) {
                 usage()
@@ -58,6 +59,7 @@ class Main {
         [FORMAT_CSV, FORMAT_SQLITE, FORMAT_PLIST]
     }
 
+    @SuppressWarnings('Println')
     static void usage() {
         println "java -jar build/libs/output-all.jar greachapi /Users/sdelamo/Downloads/ (${validFormats().join('|')})"
     }

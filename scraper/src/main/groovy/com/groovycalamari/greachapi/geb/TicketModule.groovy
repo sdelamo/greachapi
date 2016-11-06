@@ -46,7 +46,7 @@ class TicketModule extends Module {
         if ( legendDivs.empty ) {
             return ''
         }
-        legendDivs.collect { it.text() }.join('</br>')
+        legendDivs*.text().join('</br>')
     }
 
 }

@@ -1,5 +1,3 @@
-apply plugin: 'groovy'
-
 group 'com.groovycalamari.greachapi'
 version '0.1'
 
