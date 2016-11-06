@@ -1,7 +1,6 @@
 package com.groovycalamari.greachapi
 
-import com.groovycalamari.greachapi.geb.HomePage
-import geb.Browser
+import com.groovycalamari.greachapi.geb.TicketsFetcher
 import spock.lang.Specification
 import sun.security.krb5.internal.Ticket
 
@@ -9,9 +8,7 @@ class TicketsFetcherSpec extends Specification {
 
     def "test different conferences tickets are fetched"() {
         when:
-        def browser = new Browser()
-        HomePage page = browser.to HomePage
-        Set<Ticket> tickets = page.tickets()
+        Set<Ticket> tickets = TicketsFetcher.fetchTickets()
 
         then:
         tickets
