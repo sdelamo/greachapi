@@ -2,7 +2,6 @@ package com.groovycalamari.greachapi
 
 import com.groovycalamari.greachapi.geb.TicketsFetcher
 import spock.lang.Specification
-import sun.security.krb5.internal.Ticket
 
 class TicketsFetcherSpec extends Specification {
 
