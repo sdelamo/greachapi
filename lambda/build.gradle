@@ -1,0 +1,33 @@
+apply plugin: 'groovy'
+
+group 'com.groovycalamari.greachapi'
+version '0.1'
+
+ext {
+    awsLambdaVersion = '1.1.0'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile "org.codehaus.groovy:groovy-all:$groovyVersion"
+    compile "org.gebish:geb-core:$gebVersion"
+    compile "org.seleniumhq.selenium:selenium-support:$seleniumVersion"
+    compile "org.seleniumhq.selenium:selenium-htmlunit-driver:$htmlUnitDriverVersion"
+    compile "net.sourceforge.htmlunit:htmlunit:$htmlUnitVersion"
+    compile "com.amazonaws:aws-lambda-java-core:$awsLambdaVersion"
+    compile project(":scraper")
+}
+
+task buildZip(type: Zip) {
+    from compileGroovy
+    from processResources
+    into('lib') {
+        from configurations.runtime
+    }
+}
+
+build.dependsOn buildZip
+

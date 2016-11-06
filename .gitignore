@@ -2,3 +2,6 @@
 /.idea
 /scraper/build
 /phantomjsdriver.log
+/.DS_Store
+/lambda/.DS_Store
+/lambda/build
